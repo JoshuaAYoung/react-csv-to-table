@@ -1,6 +1,6 @@
 {
-  "name": "react-csv-to-table",
-  "version": "0.0.4",
+  "name": "react-csv-to-table-18",
+  "version": "0.0.5",
   "description": "React library to show a simple table",
   "main": "dist/index.js",
   "scripts": {
@@ -24,11 +24,11 @@
     "@babel/preset-env": "^7.7.6",
     "@babel/preset-react": "^7.7.4",
     "babel-loader": "^8.0.6",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
   },
   "peerDependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }

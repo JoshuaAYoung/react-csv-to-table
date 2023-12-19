@@ -8,13 +8,9 @@ Blog post https://medium.com/@marudhupandiyang/react-csv-to-html-table-f7880a90b
 
 ### Installation:
 
-Use for React >= v16
+Use for React >= v18
 
-    `npm install react-csv-to-table`
-
- To use for React >= v15+
-
-    `npm install react-csv-to-table@0.0.1`
+    `npm install react-csv-to-table-18`
 
 ### Usage:
 

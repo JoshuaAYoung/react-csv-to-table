@@ -39,7 +39,6 @@ module.exports = {
   },
   target: "web",
   plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.BannerPlugin({
       banner: `
 ${package.name} v${package.version}
