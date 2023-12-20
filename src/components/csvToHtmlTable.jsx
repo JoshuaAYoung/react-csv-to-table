@@ -13,7 +13,7 @@ const CsvToHtmlTable = ({
   renderCell,
   fillEmpty,
 }) => {
-  console.log("WHYYYYY?")
+  console.log('WHYYYYY?');
   const rowsWithColumns = parseCsvToRowsAndColumn(data.trim(), csvDelimiter);
   let headerRow = undefined;
   if (hasHeader) {
@@ -39,8 +39,8 @@ const CsvToHtmlTable = ({
     if (row && fillEmpty) {
       return (
         headerRow.map &&
-        headerRow.map((headerRow, colIdx) => {
-          console.log('crude but?:', row[colIdx], headerRow);
+        headerRow.map((headRow, colIdx) => {
+          console.log('crude but?:', row[colIdx], headRow);
           if (row[colIdx]) {
             return (
               <td
@@ -58,16 +58,18 @@ const CsvToHtmlTable = ({
               </td>
             );
           } else {
-            <td
-              className={tableColumnClassName}
-              key={
-                typeof rowKey === 'function'
-                  ? colKey(row, colIdx, rowIdx)
-                  : headerRow[colIdx][colKey]
-              }
-            >
-              'p'
-            </td>;
+            return (
+              <td
+                className={tableColumnClassName}
+                key={
+                  typeof rowKey === 'function'
+                    ? colKey(row, colIdx, rowIdx)
+                    : headerRow[colIdx][colKey]
+                }
+              >
+                ''
+              </td>
+            );
           }
         })
       );
