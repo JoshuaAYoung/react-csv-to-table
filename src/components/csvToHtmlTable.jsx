@@ -34,6 +34,7 @@ const CsvToHtmlTable = ({
   };
 
   const renderCells = (row, rowIdx) => {
+    console.log('logs work?');
     if (row && fillEmpty) {
       return (
         headerRow.map &&
@@ -123,6 +124,7 @@ CsvToHtmlTable.defaultProps = {
   tableClassName: '',
   tableRowClassName: '',
   tableColumnClassName: '',
+  fillEmpty: false,
 };
 
 export default CsvToHtmlTable;
