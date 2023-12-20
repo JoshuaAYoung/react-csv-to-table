@@ -37,7 +37,8 @@ const CsvToHtmlTable = ({
     if (row && fillEmpty) {
       return (
         headerRow.map &&
-        headerRow.map((_, colIdx) => {
+        headerRow.map((headerRow, colIdx) => {
+          console.log('crude but?:', row[colIdx], headerRow);
           if (row[colIdx]) {
             return (
               <td
@@ -62,7 +63,7 @@ const CsvToHtmlTable = ({
                   : headerRow[colIdx][colKey]
               }
             >
-              ''
+              'p'
             </td>;
           }
         })
