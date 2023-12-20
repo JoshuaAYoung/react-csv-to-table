@@ -13,6 +13,7 @@ const CsvToHtmlTable = ({
   renderCell,
   fillEmpty,
 }) => {
+  console.log("WHYYYYY?")
   const rowsWithColumns = parseCsvToRowsAndColumn(data.trim(), csvDelimiter);
   let headerRow = undefined;
   if (hasHeader) {
@@ -50,6 +51,7 @@ const CsvToHtmlTable = ({
                     : row[colIdx][colKey]
                 }
               >
+                FUCL
                 {typeof renderCell === 'function'
                   ? renderCell(row[colIdx], colIdx, rowIdx)
                   : row[colIdx]}
@@ -81,6 +83,7 @@ const CsvToHtmlTable = ({
                 : column[colKey]
             }
           >
+            NOT
             {typeof renderCell === 'function'
               ? renderCell(column, colIdx, rowIdx)
               : column}
