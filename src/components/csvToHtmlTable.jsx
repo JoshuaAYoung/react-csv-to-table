@@ -1,5 +1,5 @@
-import React from "react";
-import { parseCsvToRowsAndColumn } from "../utils";
+import React from 'react';
+import { parseCsvToRowsAndColumn } from '../utils';
 
 const CsvToHtmlTable = ({
   data,
@@ -10,7 +10,8 @@ const CsvToHtmlTable = ({
   tableColumnClassName,
   rowKey,
   colKey,
-  renderCell
+  renderCell,
+  fillEmpty,
 }) => {
   const rowsWithColumns = parseCsvToRowsAndColumn(data.trim(), csvDelimiter);
   let headerRow = undefined;
@@ -23,17 +24,51 @@ const CsvToHtmlTable = ({
       return (
         <thead>
           <tr>
-            {
-              row.map((column, i) => (
-                <th
-                  key={`header-${i}`}
-                >
-                  {column}
-                </th>
-              ))
-            }
+            {row.map((column, i) => (
+              <th key={`header-${i}`}>{column}</th>
+            ))}
           </tr>
         </thead>
+      );
+    }
+  };
+
+  const renderCells = (row, rowIdx) => {
+    if (row && fillEmpty) {
+      return (
+        headerRow.map &&
+        headerRow.map((_, colIdx) => (
+          <td
+            className={tableColumnClassName}
+            key={
+              typeof rowKey === 'function'
+                ? colKey(row, colIdx, rowIdx)
+                : row[colIdx][colKey]
+            }
+          >
+            {typeof renderCell === 'function'
+              ? renderCell(row[colIdx], colIdx, rowIdx)
+              : row[colIdx]}
+          </td>
+        ))
+      );
+    } else {
+      return (
+        row.map &&
+        row.map((column, colIdx) => (
+          <td
+            className={tableColumnClassName}
+            key={
+              typeof rowKey === 'function'
+                ? colKey(row, colIdx, rowIdx)
+                : column[colKey]
+            }
+          >
+            {typeof renderCell === 'function'
+              ? renderCell(column, colIdx, rowIdx)
+              : column}
+          </td>
+        ))
       );
     }
   };
@@ -42,22 +77,14 @@ const CsvToHtmlTable = ({
     if (rows && rows.map) {
       return (
         <tbody>
-          {
-            rows.map((row, rowIdx) => (
-              <tr className={tableRowClassName} key={typeof(rowKey) === 'function' ? rowKey(row, rowIdx) : rowIdx}>
-                {
-                  row.map && row.map((column, colIdx) => (
-                    <td
-                      className={tableColumnClassName}
-                      key={typeof(rowKey) === 'function' ? colKey(row, colIdx, rowIdx) : column[colKey]}
-                    >
-                      {typeof renderCell === "function" ? renderCell(column, colIdx, rowIdx) : column}
-                    </td>
-                  ))
-                }
-              </tr>
-            ))
-          }
+          {rows.map((row, rowIdx) => (
+            <tr
+              className={tableRowClassName}
+              key={typeof rowKey === 'function' ? rowKey(row, rowIdx) : rowIdx}
+            >
+              {renderCells(row, rowIdx)}
+            </tr>
+          ))}
         </tbody>
       );
     }
