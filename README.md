@@ -1,3 +1,9 @@
+# Notes from Josh Young Fork #
+Basically, the only thing I've done to this package is update some dependencies to work with React 18. I've also added a few props to the csvToHtmlTable utility that I needed and found helpful:
+
+- `fillEmpty` is a prop that fills undefined cells with an empty space (`&nbsp;`)
+- `headerTitle` adds a row to the thead above the trs with a title. Uses a new className of `csv-html-header-title`
+
 ## React CSV to HTML Table (Only 3Kb unzipped)
 
 CSV is the simplest form of storing a tabular data. Each record consists of one or more fields, separated by commas. The use of the comma as a field separator is the source of the name for this file format. React csv to html table is a simple reactjs library that takes CSV file content as input and renders a simple HTML table.
