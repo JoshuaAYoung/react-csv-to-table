@@ -37,20 +37,35 @@ const CsvToHtmlTable = ({
     if (row && fillEmpty) {
       return (
         headerRow.map &&
-        headerRow.map((_, colIdx) => (
-          <td
-            className={tableColumnClassName}
-            key={
-              typeof rowKey === 'function'
-                ? colKey(row, colIdx, rowIdx)
-                : row[colIdx][colKey]
-            }
-          >
-            {typeof renderCell === 'function'
-              ? renderCell(row[colIdx], colIdx, rowIdx)
-              : row[colIdx]}
-          </td>
-        ))
+        headerRow.map((_, colIdx) => {
+          if (row[colIdx]) {
+            return (
+              <td
+                className={tableColumnClassName}
+                key={
+                  typeof rowKey === 'function'
+                    ? colKey(row, colIdx, rowIdx)
+                    : row[colIdx][colKey]
+                }
+              >
+                {typeof renderCell === 'function'
+                  ? renderCell(row[colIdx], colIdx, rowIdx)
+                  : row[colIdx]}
+              </td>
+            );
+          } else {
+            <td
+              className={tableColumnClassName}
+              key={
+                typeof rowKey === 'function'
+                  ? colKey(row, colIdx, rowIdx)
+                  : headerRow[colIdx][colKey]
+              }
+            >
+              ''
+            </td>;
+          }
+        })
       );
     } else {
       return (
