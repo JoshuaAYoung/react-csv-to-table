@@ -1,9 +1,9 @@
 import React from 'react';
 import { parseCsvToRowsAndColumn } from '../utils/parsingUtils';
 import Table from './Table.jsx';
-import Header from './Header.jsx'
+import Header from './Header.jsx';
 
-const CsvToHtmlTable = ({
+function CsvToHtmlTable({
   data,
   csvDelimiter,
   hasHeader,
@@ -12,11 +12,12 @@ const CsvToHtmlTable = ({
   tableColumnClassName,
   rowKey,
   colKey,
+  renderCell,
   fillEmpty,
   headerTitle,
-}) => {
+}) {
   const rowsWithColumns = parseCsvToRowsAndColumn(data.trim(), csvDelimiter);
-  let headerRow = undefined;
+  let headerRow;
   if (hasHeader) {
     headerRow = rowsWithColumns.splice(0, 1)[0];
   }
@@ -36,7 +37,7 @@ const CsvToHtmlTable = ({
       />
     </table>
   );
-};
+}
 
 CsvToHtmlTable.defaultProps = {
   data: '',

@@ -7,7 +7,7 @@ function Cells(
   headerRow,
   tableColumnClassName,
   colKey,
-  renderCell
+  renderCell,
 ) {
   if (row && fillEmpty) {
     return (
@@ -28,41 +28,39 @@ function Cells(
                 : row[colIdx]}
             </td>
           );
-        } else {
-          return (
-            <td
-              className={tableColumnClassName}
-              key={
-                typeof rowKey === 'function'
-                  ? colKey(row, colIdx, rowIdx)
-                  : headerRow[colIdx][colKey]
-              }
-            >
-              &nbsp;
-            </td>
-          );
         }
+        return (
+          <td
+            className={tableColumnClassName}
+            key={
+              typeof rowKey === 'function'
+                ? colKey(row, colIdx, rowIdx)
+                : headerRow[colIdx][colKey]
+            }
+          >
+            &nbsp;
+          </td>
+        );
       })
     );
-  } else {
-    return (
-      row.map &&
-      row.map((column, colIdx) => (
-        <td
-          className={tableColumnClassName}
-          key={
-            typeof rowKey === 'function'
-              ? colKey(row, colIdx, rowIdx)
-              : column[colKey]
-          }
-        >
-          {typeof renderCell === 'function'
-            ? renderCell(column, colIdx, rowIdx)
-            : column}
-        </td>
-      ))
-    );
   }
+  return (
+    row.map &&
+    row.map((column, colIdx) => (
+      <td
+        className={tableColumnClassName}
+        key={
+          typeof rowKey === 'function'
+            ? colKey(row, colIdx, rowIdx)
+            : column[colKey]
+        }
+      >
+        {typeof renderCell === 'function'
+          ? renderCell(column, colIdx, rowIdx)
+          : column}
+      </td>
+    ))
+  );
 }
 
 export default Cells;

@@ -1,26 +1,31 @@
 import React from 'react';
+import { parseCsvToRowsAndColumn } from '../utils/parsingUtils';
 
-function Header(row, headerTitle) {
-  if (row && row.map) {
+function Header(row, headerTitle, data) {
+  let rowValue = row;
+  if (!row && data) {
+    const rowsWithColumns = parseCsvToRowsAndColumn(data.trim(), csvDelimiter);
+    rowValue = rowsWithColumns.splice(0, 1)[0];
+  }
+
+  if (rowValue && rowValue.map) {
     return (
       <thead>
         {headerTitle && (
           <tr>
-            <th colSpan={headerRow.length} className='csv-html-header-title'>
+            <th colSpan={rowValue.length} className="csv-html-header-title">
               {headerTitle}
             </th>
           </tr>
         )}
         <tr>
-          {row.map((column, i) => (
+          {rowValue.map((column, i) => (
             <th key={`header-${i}`}>{column}</th>
           ))}
         </tr>
       </thead>
     );
   }
-
-  return;
 }
 
 Header.displayName = 'HeaderComponent';

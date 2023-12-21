@@ -35,9 +35,9 @@ import { CsvToHtml } from 'react-csv-to-table-18';
 3. `git add .`
 4. `git commit -am '2.0.0'`
 5. `git tag v2.0.0`
-6. `npm publish`
-7. `git push`
-8. `git push --tags`
+6. `git push`
+7. `git push --tags`
+8. `npm publish`
 
 ## React CSV to HTML Table (Only 3Kb unzipped)
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import Cells from './Cells.jsx';
+import Cells from './Cells';
 
 function Table({
   rows,
