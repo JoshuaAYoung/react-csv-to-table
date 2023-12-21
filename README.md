@@ -1,8 +1,43 @@
-# Notes from Josh Young Fork #
+# Notes from Josh Young Fork
+
 Basically, the only thing I've done to this package is update some dependencies to work with React 18. I've also added a few props to the csvToHtmlTable utility that I needed and found helpful:
 
 - `fillEmpty` is a prop that fills undefined cells with an empty space (`&nbsp;`)
 - `headerTitle` adds a row to the thead above the trs with a title. Uses a new className of `csv-html-header-title`
+
+I also added the ability to separate the table and the header using the `CsvToHtmlSeparateTable` component. In my use case, I needed to add "next file" and "previous file" buttons to the header and make the header and buttons sticky.
+
+This essentially allows you to split the two using dot notation as follows:
+
+```jsx
+// notice the named import
+import { CsvToHtml } from 'react-csv-to-table-18';
+
+...
+// All props can be passed to the Container and they will be dispersed to the right components
+<CsvToHtml.Container
+  data={sampleData}
+  csvDelimiter=","
+  fillEmpty={true}
+  headerTitle="CSV File"
+/>
+  <CsvToHtml.Header />
+  <MyComponent />
+  <CsvToHtml.Table />
+<CsvToHtml.Container />
+....
+```
+
+## Publishing a new Version
+
+1. `npm run build`
+2. update `package.json` and `package-lock.json` versions
+3. `git add .`
+4. `git commit -am '2.0.0'`
+5. `git tag v2.0.0`
+6. `npm publish`
+7. `git push`
+8. `git push --tags`
 
 ## React CSV to HTML Table (Only 3Kb unzipped)
 
@@ -16,11 +51,11 @@ Blog post https://medium.com/@marudhupandiyang/react-csv-to-html-table-f7880a90b
 
 Use for React >= v18
 
-    `npm install react-csv-to-table-18`
+  `npm install react-csv-to-table-18`
 
 ### Usage:
 
-```
+```jsx
 import { CsvToHtmlTable } from 'react-csv-to-table';
 
 const sampleData = `
@@ -45,19 +80,16 @@ Chrysler Imperial,14.7,8,440,230,3.23,5.345,17.42,0,0,3,4
 Fiat 128,32.4,4,78.7,66,4.08,2.2,19.47,1,1,4,1
 `;
 
-<CsvToHtmlTable
-  data={sampleData}
-  csvDelimiter=","
-/>
+<CsvToHtmlTable data={sampleData} csvDelimiter=',' />;
 ```
 
 Easily customizable via css using classnames
 
-```
+```jsx
 <CsvToHtmlTable
   data={sampleData}
-  csvDelimiter=","
-  tableClassName="table table-striped table-hover"
+  csvDelimiter=','
+  tableClassName='table table-striped table-hover'
 />
 ```
 
@@ -65,26 +97,26 @@ The above code displays a table like below which is styled using bootstrap.
 
 ![Table styled with bootstrap](https://i.imgur.com/nW3R9z8.png)
 
-
 ### Complete Properties
 
-|Property Name  | Type | Default Value  | Description |
-|---|---|---|---|
-|data | string  | Nothing  | Hold the complete CSV Data. If your `csv` data is in a `remote url`, `fetch` it and send the contents of the file.  |
-|hasHeader   | bool  | true  | Tells the program to consider the first line of the provided data as the header. If `hasHeader` is false, then the first line will also be treated like any other row.  |
-|csvDelimiter  | string  | '\t'  | The `delimiter` that  seperates the columns in the text. Other possible values can include `,`,'&nbsp;&nbsp;&nbsp;&nbsp;'(4 spaces) |
-|tableClassName|string|Nothing|Set the class name for the whole table|
-|tableRowClassName|string|Nothing|Set the class name for each row in the table body|
-|tableColumnClassName|string|Nothing|Set the class name for each column in the table body|
-|rowKey|function| (row, rowIdx) => `row-${rowIdx}`|If not passed, `index` of the row will be used. In case of function, the passed in function in receive row and row index as arguments as shown in default function.|
-|colKey|number or function| (col, colIdx, rowIdx) => `col-${colIdx}`| If number, the value in the column of the specified index will be used as key. In case of function, the passed in function in receive row, col index and row index as arguments as shown in default function.|
-|renderCell|function?| (value, colIdx, rowIdx) => String | If specified, calls the function with the column value to allow additional preprocessing of the csv's cell values|
+| Property Name        | Type               | Default Value                            | Description                                                                                                                                                                                                   |
+| -------------------- | ------------------ | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| data                 | string             | Nothing                                  | Hold the complete CSV Data. If your `csv` data is in a `remote url`, `fetch` it and send the contents of the file.                                                                                            |
+| hasHeader            | bool               | true                                     | Tells the program to consider the first line of the provided data as the header. If `hasHeader` is false, then the first line will also be treated like any other row.                                        |
+| csvDelimiter         | string             | '\t'                                     | The `delimiter` that seperates the columns in the text. Other possible values can include `,`,'&nbsp;&nbsp;&nbsp;&nbsp;'(4 spaces)                                                                            |
+| tableClassName       | string             | Nothing                                  | Set the class name for the whole table                                                                                                                                                                        |
+| tableRowClassName    | string             | Nothing                                  | Set the class name for each row in the table body                                                                                                                                                             |
+| tableColumnClassName | string             | Nothing                                  | Set the class name for each column in the table body                                                                                                                                                          |
+| rowKey               | function           | (row, rowIdx) => `row-${rowIdx}`         | If not passed, `index` of the row will be used. In case of function, the passed in function in receive row and row index as arguments as shown in default function.                                           |
+| colKey               | number or function | (col, colIdx, rowIdx) => `col-${colIdx}` | If number, the value in the column of the specified index will be used as key. In case of function, the passed in function in receive row, col index and row index as arguments as shown in default function. |
+| renderCell           | function?          | (value, colIdx, rowIdx) => String        | If specified, calls the function with the column value to allow additional preprocessing of the csv's cell values                                                                                             |
 
 ### Instructions for example
- Checkout example [Readme](examples)
 
+Checkout example [Readme](examples)
 
 ### Roadmap
+
 1. Add more features to support multiple functionalities.
 2. Make it to render millions of row easily.
 3. Add excel like features

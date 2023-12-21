@@ -1,5 +1,7 @@
 import React from 'react';
-import { parseCsvToRowsAndColumn } from '../utils';
+import { parseCsvToRowsAndColumn } from '../utils/parsingUtils';
+import Table from './Table.jsx';
+import Header from './Header.jsx'
 
 const CsvToHtmlTable = ({
   data,
@@ -10,7 +12,6 @@ const CsvToHtmlTable = ({
   tableColumnClassName,
   rowKey,
   colKey,
-  renderCell,
   fillEmpty,
   headerTitle,
 }) => {
@@ -20,105 +21,19 @@ const CsvToHtmlTable = ({
     headerRow = rowsWithColumns.splice(0, 1)[0];
   }
 
-  const renderTableHeader = (row) => {
-    if (row && row.map) {
-      return (
-        <thead>
-          {headerTitle && (
-            <tr>
-              <th colSpan={headerRow.length} className='csv-html-header-title'>
-                {headerTitle}
-              </th>
-            </tr>
-          )}
-          <tr>
-            {row.map((column, i) => (
-              <th key={`header-${i}`}>{column}</th>
-            ))}
-          </tr>
-        </thead>
-      );
-    }
-  };
-
-  const renderCells = (row, rowIdx) => {
-    if (row && fillEmpty) {
-      return (
-        headerRow.map &&
-        headerRow.map((headRow, colIdx) => {
-          if (row[colIdx]) {
-            return (
-              <td
-                className={tableColumnClassName}
-                key={
-                  typeof rowKey === 'function'
-                    ? colKey(row, colIdx, rowIdx)
-                    : row[colIdx][colKey]
-                }
-              >
-                {typeof renderCell === 'function'
-                  ? renderCell(row[colIdx], colIdx, rowIdx)
-                  : row[colIdx]}
-              </td>
-            );
-          } else {
-            return (
-              <td
-                className={tableColumnClassName}
-                key={
-                  typeof rowKey === 'function'
-                    ? colKey(row, colIdx, rowIdx)
-                    : headerRow[colIdx][colKey]
-                }
-              >
-                &nbsp;
-              </td>
-            );
-          }
-        })
-      );
-    } else {
-      return (
-        row.map &&
-        row.map((column, colIdx) => (
-          <td
-            className={tableColumnClassName}
-            key={
-              typeof rowKey === 'function'
-                ? colKey(row, colIdx, rowIdx)
-                : column[colKey]
-            }
-          >
-            {typeof renderCell === 'function'
-              ? renderCell(column, colIdx, rowIdx)
-              : column}
-          </td>
-        ))
-      );
-    }
-  };
-
-  const renderTableBody = (rows) => {
-    if (rows && rows.map) {
-      return (
-        <tbody>
-          {rows.map((row, rowIdx) => (
-            <tr
-              className={tableRowClassName}
-              key={typeof rowKey === 'function' ? rowKey(row, rowIdx) : rowIdx}
-            >
-              {renderCells(row, rowIdx)}
-            </tr>
-          ))}
-        </tbody>
-      );
-    }
-  };
-
   return (
     <table className={`csv-html-table ${tableClassName}`}>
-      {renderTableHeader(headerRow)}
-      {renderTableBody(rowsWithColumns)}
+      <Header row={headerRow} headerTitle={headerTitle} />
+      <Table
+        rows={rowsWithColumns}
+        tableRowClassName={tableRowClassName}
+        rowKey={rowKey}
+        fillEmpty={fillEmpty}
+        headerRow={headerRow}
+        tableColumnClassName={tableColumnClassName}
+        colKey={colKey}
+        renderCell={renderCell}
+      />
     </table>
   );
 };
