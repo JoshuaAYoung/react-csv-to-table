@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Header = (row, headerTitle) => {
+function Header(row, headerTitle) {
   if (row && row.map) {
     return (
       <thead>
@@ -21,7 +21,7 @@ const Header = (row, headerTitle) => {
   }
 
   return;
-};
+}
 
 Header.displayName = 'HeaderComponent';
 

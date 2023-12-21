@@ -1,7 +1,7 @@
 import React from 'react';
 import Cells from './Cells.jsx';
 
-const Table = (
+function Table({
   rows,
   tableRowClassName,
   rowKey,
@@ -9,8 +9,8 @@ const Table = (
   headerRow,
   tableColumnClassName,
   colKey,
-  renderCell
-) => {
+  renderCell,
+}) {
   return (
     <tbody>
       {rows.map((row, rowIdx) => (
@@ -31,7 +31,7 @@ const Table = (
       ))}
     </tbody>
   );
-};
+}
 
 Table.displayName = 'TableComponent';
 

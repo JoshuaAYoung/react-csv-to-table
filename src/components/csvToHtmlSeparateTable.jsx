@@ -3,7 +3,7 @@ import { parseCsvToRowsAndColumn } from '../utils/parsingUtils';
 import Table from './Table.jsx';
 import Header from './Header.jsx'
 
-const Container = ({
+const CsvToHtml = ({
   data,
   csvDelimiter,
   tableRowClassName,
@@ -60,8 +60,7 @@ Container.defaultProps = {
   headerTitle: '',
 };
 
-export default {
-  Container,
-  Table,
-  Header
-};
+CsvToHtml.Header = Header;
+CsvToHtml.Table = Table;
+
+export default CsvToHtml;

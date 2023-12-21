@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Cells = (
+function Cells(
   row,
   rowIdx,
   fillEmpty,
@@ -8,7 +8,7 @@ const Cells = (
   tableColumnClassName,
   colKey,
   renderCell
-) => {
+) {
   if (row && fillEmpty) {
     return (
       headerRow.map &&
@@ -63,6 +63,6 @@ const Cells = (
       ))
     );
   }
-};
+}
 
 export default Cells;
