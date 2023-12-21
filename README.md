@@ -3,6 +3,8 @@ Basically, the only thing I've done to this package is update some dependencies 
 
 - `fillEmpty` is a prop that fills undefined cells with an empty space (`&nbsp;`)
 - `headerTitle` adds a row to the thead above the trs with a title. Uses a new className of `csv-html-header-title`
+- `renderRightComponent` and `renderLeftComponent` can be used to put a component on either side of the Header Title (if provided). 
+  - Note: You must specify a `rightComponentSpan` or `leftComponentSpan` for each element you're adding to the header depending on how wide they.
 
 ## React CSV to HTML Table (Only 3Kb unzipped)
 

@@ -13,6 +13,10 @@ const CsvToHtmlTable = ({
   renderCell,
   fillEmpty,
   headerTitle,
+  renderRightComponent,
+  renderLeftComponent,
+  rightComponentSpan,
+  leftComponentSpan,
 }) => {
   const rowsWithColumns = parseCsvToRowsAndColumn(data.trim(), csvDelimiter);
   let headerRow = undefined;
@@ -21,14 +25,30 @@ const CsvToHtmlTable = ({
   }
 
   const renderTableHeader = (row) => {
+    const rightComponent =
+      renderRightComponent && rightComponentSpan ? (
+        <th colSpan={rightComponentSpan}>{renderRightComponent()}</th>
+      ) : undefined;
+    const leftComponent =
+      renderLeftComponent && leftComponentSpan ? (
+        <th colSpan={leftComponentSpan}>{renderLeftComponent()}</th>
+      ) : undefined;
+
     if (row && row.map) {
       return (
         <thead>
           {headerTitle && (
             <tr>
-              <th colSpan={headerRow.length} className='csv-html-header-title'>
+              {rightComponent}
+              <th
+                colSpan={
+                  headerRow.length - rightComponentSpan - leftComponentSpan
+                }
+                className='csv-html-header-title'
+              >
                 {headerTitle}
               </th>
+              {leftComponent}
             </tr>
           )}
           <tr>
@@ -134,6 +154,8 @@ CsvToHtmlTable.defaultProps = {
   tableColumnClassName: '',
   fillEmpty: false,
   headerTitle: '',
+  rightComponentSpan: 0,
+  leftComponentSpan: 0,
 };
 
 export default CsvToHtmlTable;
