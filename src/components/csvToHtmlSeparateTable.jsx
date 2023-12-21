@@ -48,7 +48,7 @@ const CsvToHtml = ({
   );
 };
 
-Container.defaultProps = {
+CsvToHtml.defaultProps = {
   data: '',
   rowKey: (row, rowIdx) => `row-${rowIdx}`,
   colKey: (col, colIdx, rowIdx) => `col-${colIdx}`,
