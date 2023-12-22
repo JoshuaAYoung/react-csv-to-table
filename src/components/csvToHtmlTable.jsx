@@ -27,11 +27,15 @@ const CsvToHtmlTable = ({
   const renderTableHeader = (row) => {
     const rightComponent =
       renderRightComponent && rightComponentSpan ? (
-        <th colSpan={rightComponentSpan}>{renderRightComponent()}</th>
+        <th colSpan={rightComponentSpan} className='csv-html-header-right'>
+          {renderRightComponent()}
+        </th>
       ) : undefined;
     const leftComponent =
       renderLeftComponent && leftComponentSpan ? (
-        <th colSpan={leftComponentSpan}>{renderLeftComponent()}</th>
+        <th colSpan={leftComponentSpan} className='csv-html-header-left'>
+          {renderLeftComponent()}
+        </th>
       ) : undefined;
 
     if (row && row.map) {
