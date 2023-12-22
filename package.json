@@ -1,6 +1,6 @@
 {
   "name": "react-csv-to-table-18",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "React library to show a simple table",
   "main": "dist/index.js",
   "scripts": {

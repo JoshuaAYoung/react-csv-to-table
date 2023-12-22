@@ -17,6 +17,7 @@ const CsvToHtmlTable = ({
   renderLeftComponent,
   rightComponentSpan,
   leftComponentSpan,
+  bodyHash,
 }) => {
   const rowsWithColumns = parseCsvToRowsAndColumn(data.trim(), csvDelimiter);
   let headerRow = undefined;
@@ -125,7 +126,7 @@ const CsvToHtmlTable = ({
   const renderTableBody = (rows) => {
     if (rows && rows.map) {
       return (
-        <tbody>
+        <tbody id={bodyHash || 'tbody'}>
           {rows.map((row, rowIdx) => (
             <tr
               className={tableRowClassName}
@@ -160,6 +161,7 @@ CsvToHtmlTable.defaultProps = {
   headerTitle: '',
   rightComponentSpan: 0,
   leftComponentSpan: 0,
+  bodyHash: '',
 };
 
 export default CsvToHtmlTable;
