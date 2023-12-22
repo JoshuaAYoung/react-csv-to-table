@@ -38,8 +38,8 @@ const CsvToHtmlTable = ({
       return (
         <thead>
           {headerTitle && (
-            <tr>
-              {rightComponent}
+            <tr className='csv-html-title-row'>
+              {leftComponent}
               <th
                 colSpan={
                   headerRow.length - rightComponentSpan - leftComponentSpan
@@ -48,7 +48,7 @@ const CsvToHtmlTable = ({
               >
                 {headerTitle}
               </th>
-              {leftComponent}
+              {rightComponent}
             </tr>
           )}
           <tr>
