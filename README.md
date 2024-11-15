@@ -2,8 +2,8 @@
 Basically, the only thing I've done to this package is update some dependencies to work with React 18. I've also added a few props to the csvToHtmlTable utility that I needed and found helpful:
 
 - `fillEmpty` is a prop that fills undefined cells with an empty space (`&nbsp;`)
-- `headerTitle` adds a row to the thead above the trs with a title. Uses a new className of `csv-html-header-title`
-- `bodyHash` can be used to add an id property to the <tbody> element for use in hash linking.
+- `headerTitle` adds a row to the `<thead>` above the `<trs>` with a title. Uses a new className of `csv-html-header-title`
+- `bodyHash` can be used to add an id property to the `<tbody>` element for use in hash linking.
 - `renderRightComponent` and `renderLeftComponent` can be used to put a component on either side of the Header Title (if provided). 
   - Note: You must specify a `rightComponentSpan` or `leftComponentSpan` for each element you're adding to the header depending on how wide they.
 
